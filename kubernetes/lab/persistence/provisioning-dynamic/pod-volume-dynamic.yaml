@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-volume-dynamic
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+      - mountPath: "/usr/share/nginx/html"
+        name: external
+      resources:
+        limits:
+          cpu: "20m"
+          memory: "50Mi"         
+  volumes:
+    - name: external 
+      persistentVolumeClaim:
+        claimName: pvc-dynamic
